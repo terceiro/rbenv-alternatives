@@ -28,6 +28,8 @@ it:
     $ rbenv global 1.9.2-debian
     $ rbenv version
     1.9.2-debian (set by /home/terceiro/.rbenv/global)
+    $ ruby -v
+    ruby 1.9.2p290 (2011-07-09 revision 32553) [x86_64-linux]
 
 
 ## Copyright
