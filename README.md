@@ -13,17 +13,17 @@ and setting up rbenv itself.
 If you install rbenv through APT, then it will already bring this plugin with
 it:
 
-  # apt-get install rbenv
+    # apt-get install rbenv
 
 ## Usage
 
-  $ rbenv alternatives
-  $ rbenv versions
-    1.8.7-debian
-    1.9.2-debian
-  $ rbenv global 1.9.2-debian
-  $ rbenv version
-  1.9.2-debian (set by /home/terceiro/.rbenv/global)
+    $ rbenv alternatives
+    $ rbenv versions
+      1.8.7-debian
+      1.9.2-debian
+    $ rbenv global 1.9.2-debian
+    $ rbenv version
+    1.9.2-debian (set by /home/terceiro/.rbenv/global)
 
 The Ruby Ruby interpreters installed via APT will become available to use with
 rbenv in addition to any other Ruby interpreter you may have compiled manually
