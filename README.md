@@ -37,7 +37,7 @@ list of Debian-provided Ruby interpreters with rbenv.
 
 ## Copyright
 
-Copyright © 2011, Antonio Terceiro <terceiro@softwarelivre.org>
+Copyright © 2011, Antonio Terceiro <terceiro@debian.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
