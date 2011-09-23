@@ -21,11 +21,12 @@ while read command; do
   case "$command" in
     master*)
       master=$(echo "$command" | awk '{print $2}')
-      version="$($master -e 'puts RUBY_VERSION')-debian"
+      version=$($master -e 'puts(((defined?(RUBY_ENGINE) && RUBY_ENGINE != "ruby") && RUBY_ENGINE + "-" || "") + (defined?(Rubinius) && Rubinius::VERSION || (defined?(JRUBY_VERSION) && JRUBY_VERSION) || RUBY_VERSION))')-debian
       rm -rf "${RBENV_ROOT}/versions/$version"
       mkdir -p "${RBENV_ROOT}/versions/$version/bin"
       ln -s "$master" "${RBENV_ROOT}/versions/$version/bin/ruby"
       ln -s "${master/ruby/gem}" "${RBENV_ROOT}/versions/$version/bin/gem"
+      echo "Added $version"
       ;;
     *)
       prog=$(echo "$command" | awk '{print $1}')
