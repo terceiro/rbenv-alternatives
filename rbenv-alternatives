@@ -8,6 +8,8 @@ if ! which update-alternatives >/dev/null; then
   exit 1
 fi
 
+rm -rf ${RBENV_ROOT}/versions/*-debian
+
 update-alternatives --query ruby | sed -e '
   1,/^$/ d
   /^Priority:/ d

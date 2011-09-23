@@ -31,6 +31,9 @@ it:
     $ ruby -v
     ruby 1.9.2p290 (2011-07-09 revision 32553) [x86_64-linux]
 
+Whenever you install a new Ruby interpreter, or uninstall a previously
+installed one, just run `rbenv alternatives` again and it will update your
+list of Debian-provided Ruby interpreters with rbenv.
 
 ## Copyright
 
