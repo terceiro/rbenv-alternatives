@@ -1,14 +1,18 @@
-# rbenv-alternatives: an rbenv plugin to hook into the Debian alternatives system
+# rbenv-alternatives
 
 This plugin allow you to add Ruby interpreters available through the Debian
 alternatives system into rbenv. This means you can install the different Ruby
-interpreters through APT on Debian and derivative distrubutions, and switch
+interpreters through APT on Debian and derivative distributions, and switch
 between them using rbenv.
+
+The Ruby Ruby interpreters installed via APT will become available to use with
+rbenv in addition to any other Ruby interpreter you may have compiled manually
+(or installed into `~/.rbenv/versions` in any other way).
 
 ## Installation
 
-Just copy rbenv-alternatives into any directory in your $PATH, after installing
-and setting up rbenv itself.
+Just copy `rbenv-alternatives` into any directory in your `$PATH`, after
+installing and setting up rbenv itself.
 
 If you install rbenv through APT, then it will already bring this plugin with
 it:
@@ -25,9 +29,6 @@ it:
     $ rbenv version
     1.9.2-debian (set by /home/terceiro/.rbenv/global)
 
-The Ruby Ruby interpreters installed via APT will become available to use with
-rbenv in addition to any other Ruby interpreter you may have compiled manually
-or in any other way.
 
 ## Copyright
 
