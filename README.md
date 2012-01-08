@@ -5,9 +5,13 @@ alternatives system into rbenv. This means you can install the different Ruby
 interpreters through APT on Debian and derivative distributions, and switch
 between them using rbenv.
 
-The Ruby Ruby interpreters installed via APT will become available to use with
-rbenv in addition to any other Ruby interpreter you may have compiled manually
-(or installed into `~/.rbenv/versions` in any other way).
+The Ruby interpreters installed via APT will become available to use with rbenv
+in addition to any other Ruby interpreter you may have installed into
+`~/.rbenv/versions` in any other way.
+
+This plugin also install hooks that configure Rubygems to install gems inside
+~/.rbenv/${version}/gems. This way you get completely separated Ruby
+environments.
 
 ## Installation
 
@@ -37,7 +41,7 @@ list of Debian-provided Ruby interpreters with rbenv.
 
 ## Copyright
 
-Copyright © 2011, Antonio Terceiro <terceiro@debian.org>
+Copyright © 2011-2012, Antonio Terceiro <terceiro@debian.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
