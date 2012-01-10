@@ -8,8 +8,6 @@ if ! which update-alternatives >/dev/null; then
   exit 1
 fi
 
-rm -rf ${RBENV_ROOT}/versions/*-debian
-
 update-alternatives --query ruby | sed -e '
   1,/^$/ d
   /^Priority:/ d
@@ -22,16 +20,24 @@ while read command; do
     master*)
       master=$(echo "$command" | awk '{print $2}')
       version=$($master -e 'puts(((defined?(RUBY_ENGINE) && RUBY_ENGINE != "ruby") && RUBY_ENGINE + "-" || "") + (defined?(Rubinius) && Rubinius::VERSION || (defined?(JRUBY_VERSION) && JRUBY_VERSION) || RUBY_VERSION))')-debian
-      rm -rf "${RBENV_ROOT}/versions/$version"
-      mkdir -p "${RBENV_ROOT}/versions/$version/bin"
-      ln -s "$master" "${RBENV_ROOT}/versions/$version/bin/ruby"
-      ln -s "${master/ruby/gem}" "${RBENV_ROOT}/versions/$version/bin/gem"
-      echo "Added $version"
+      if [ -d "${RBENV_ROOT}/versions/$version" ]; then
+        skip=true
+        echo "Skipping $version, it already exists"
+      else
+        skip=false
+        rm -rf "${RBENV_ROOT}/versions/$version"
+        mkdir -p "${RBENV_ROOT}/versions/$version/bin"
+        ln -s "$master" "${RBENV_ROOT}/versions/$version/bin/ruby"
+        ln -s "${master/ruby/gem}" "${RBENV_ROOT}/versions/$version/bin/gem"
+        echo "Added $version"
+      fi
       ;;
     *)
-      prog=$(echo "$command" | awk '{print $1}')
-      target=$(echo "$command" | awk '{print $2}')
-      ln -s "$target" "${RBENV_ROOT}/versions/$version/bin/$prog"
+      if [ "$skip" = 'false' ]; then
+        prog=$(echo "$command" | awk '{print $1}')
+        target=$(echo "$command" | awk '{print $2}')
+        ln -s "$target" "${RBENV_ROOT}/versions/$version/bin/$prog"
+      fi
       ;;
   esac
 done
