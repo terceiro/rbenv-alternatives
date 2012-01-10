@@ -5,7 +5,6 @@ for version in "${RBENV_ROOT}/versions/"*-debian; do
   if [[ -d "$gem_bindir" ]]; then
     for program in "$gem_bindir"/*; do
       program_name="$(basename $program)"
-      ln -sf "$(readlink -f "$program")" "$version_bindir/${program_name}"
       register_shim "$program_name"
     done
   fi
