@@ -2,6 +2,11 @@
 set -e
 [ -n "$RBENV_DEBUG" ] && set -x
 
+if [ "$1" == '--version' ]; then
+  echo '0.3.0'
+  exit 0
+fi
+
 if ! which update-alternatives >/dev/null; then
   echo "Sorry, it seems like you do not have update-alternatives available on your PATH."
   echo "Are you sure this is a Debian (or derivative) system?"
