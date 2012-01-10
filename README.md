@@ -15,8 +15,11 @@ environments.
 
 ## Installation
 
-Just copy `rbenv-alternatives` into any directory in your `$PATH`, after
-installing and setting up rbenv itself.
+If you have installed rbenv from source into ~/.rbenv, just create a symcolic
+link to where you download this plugin inside ~/.rbenv/plugins:
+
+    $ mkdir ~/.rbenv/plugins
+    $ ln -s /path/to/rbenv-alternatives ~/.rbenv/plugins
 
 If you install rbenv through APT, then it will already bring this plugin with
 it:
