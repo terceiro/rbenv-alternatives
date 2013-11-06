@@ -15,8 +15,8 @@ environments.
 
 ## Installation
 
-If you have installed rbenv from source into ~/.rbenv, just create a symcolic
-link to where you download this plugin inside ~/.rbenv/plugins:
+If you have installed rbenv from source into ~/.rbenv, just create a symbolic
+link to where you downloaded this plugin inside ~/.rbenv/plugins:
 
     $ mkdir ~/.rbenv/plugins
     $ ln -s /path/to/rbenv-alternatives ~/.rbenv/plugins
