@@ -34,7 +34,9 @@ while read command; do
         mkdir -p "${RBENV_ROOT}/versions/$version/bin"
         ln -s "$master" "${RBENV_ROOT}/versions/$version/bin/ruby"
         ln -s "${master/ruby/gem}" "${RBENV_ROOT}/versions/$version/bin/gem"
-        [ -x /usr/bin/rake ] && ln -s /usr/bin/rake "${RBENV_ROOT}/versions/$version/bin/rake"
+        for cmd in /usr/bin/rake /usr/bin/bundle /usr/bin/pry; do
+          [ -x $cmd ] && ln -s $cmd "${RBENV_ROOT}/versions/$version/bin/${cmd##*/}"
+        done
         echo "Added $version"
       fi
       ;;
