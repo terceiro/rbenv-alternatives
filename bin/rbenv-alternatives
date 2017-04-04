@@ -3,7 +3,7 @@ set -e
 [ -n "$RBENV_DEBUG" ] && set -x
 
 if [ "$1" == '--version' ]; then
-  echo '0.3.0'
+  echo '0.4.0-dev'
   exit 0
 fi
 
@@ -25,13 +25,14 @@ while read command; do
     master*)
       master=$(echo "$command" | awk '{print $2}')
       version=$($master -e 'puts(((defined?(RUBY_ENGINE) && RUBY_ENGINE != "ruby") && RUBY_ENGINE + "-" || "") + (defined?(Rubinius) && Rubinius::VERSION || (defined?(JRUBY_VERSION) && JRUBY_VERSION) || RUBY_VERSION))')-debian
-      if [ -d "${RBENV_ROOT}/versions/$version" ]; then
+      if [ -e "${RBENV_ROOT}/versions/$version/is-debian-alternative" ]; then
         skip=true
         echo "Skipping $version, it already exists"
       else
         skip=false
         rm -rf "${RBENV_ROOT}/versions/$version"
         mkdir -p "${RBENV_ROOT}/versions/$version/bin"
+        echo "$(basename $master)" > "${RBENV_ROOT}/versions/$version/is-debian-alternative"
         ln -s "$master" "${RBENV_ROOT}/versions/$version/bin/ruby"
         ln -s "${master/ruby/gem}" "${RBENV_ROOT}/versions/$version/bin/gem"
         [ -x /usr/bin/rake ] && ln -s /usr/bin/rake "${RBENV_ROOT}/versions/$version/bin/rake"
