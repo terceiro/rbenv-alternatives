@@ -7,6 +7,16 @@ if [ "$1" == '--version' ]; then
   exit 0
 fi
 
+# if this option is passed, overwrite existing verions with a symlink to
+# similarly-versioned debian alternatives.
+#
+# eg, if we create an alternative "2.1.8-debian", also link "2.1.8" -> "2.1.8-debian".
+# If 2.1.8 already existed, it is deleted.
+overwrite=''
+if [ "$1" == '--overwrite' ]; then
+  overwrite='true'
+fi
+
 if ! which update-alternatives >/dev/null; then
   echo "Sorry, it seems like you do not have update-alternatives available on your PATH."
   echo "Are you sure this is a Debian (or derivative) system?"
@@ -37,6 +47,12 @@ while read command; do
         ln -s "${master/ruby/gem}" "${RBENV_ROOT}/versions/$version/bin/gem"
         [ -x /usr/bin/rake ] && ln -s /usr/bin/rake "${RBENV_ROOT}/versions/$version/bin/rake"
         echo "Added $version"
+        if [ "$overwrite" = 'true' ]; then
+          normal_version="${version%-debian}"
+          rm -rf "${RBENV_ROOT}/versions/$normal_version"
+          ln -s "$version" "${RBENV_ROOT}/versions/$normal_version"
+          echo "overwrote $normal_version with $version"
+        fi
       fi
       ;;
     *)
